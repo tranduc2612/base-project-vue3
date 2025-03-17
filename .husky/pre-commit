@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+yarn test:unit || (
+    echo 'Your code need to be tested...................... !';
+    false;
+)
+
+yarn format || (
+    echo 'Your code need to be formated...................... !';
+    false;
+)
+
+yarn lint || (
+    echo 'error rulee...................... !';
+    false;
+)
+
+yarn build || (
+    echo 'Build errorr...................... !';
+    false;
+)
