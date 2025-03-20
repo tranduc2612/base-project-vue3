@@ -5,5 +5,6 @@ export default createAuth0({
   clientId: '9gXIOtI8dT61rdYs9RYXuVfJotehaik4',
   authorizationParams: {
     redirect_uri: window.location.origin,
+    audience: 'https://dev-saoey73oawm3uyg7.us.auth0.com/api/v2/',
   },
 })
