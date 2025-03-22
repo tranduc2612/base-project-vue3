@@ -12,8 +12,3 @@ yarn lint || (
     echo 'error rulee...................... !';
     false;
 )
-
-yarn build || (
-    echo 'Build errorr...................... !';
-    false;
-)

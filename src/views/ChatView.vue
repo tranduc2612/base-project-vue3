@@ -1,51 +1,49 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from "vue";
-import socket, { sendMessage, onMessageReceived, joinRoom } from "@/socket/socketService";
+import { ref, nextTick } from 'vue'
+import socket, { sendMessage, onMessageReceived, joinRoom } from '@/socket/socketService'
 
 // State
-const messages = ref([]);
-const initCount = ref(false);
-const newMessage = ref("");
-const username = ref("");
-const selectedRoom = ref("room1");
+const messages = ref([])
+const newMessage = ref('')
+const username = ref('')
+const selectedRoom = ref('room1')
 const container = ref(null)
 
 // Khi component mounted, tham gia phòng
 const initChat = () => {
-  if (!username.value) return alert("Vui lòng nhập tên người dùng!");
+  if (!username.value) return alert('Vui lòng nhập tên người dùng!')
 
-  joinRoom(selectedRoom.value);
+  joinRoom(selectedRoom.value)
 
   // Clear tin nhắn cũ khi đổi room
-  messages.value = [];
+  messages.value = []
 
   // Lấy lịch sử chat khi vào phòng
-  socket.on("chatHistory", (history) => {
-    messages.value = history; // Gán lịch sử chat khi vào phòng
-  });
+  socket.on('chatHistory', (history) => {
+    messages.value = history // Gán lịch sử chat khi vào phòng
+  })
 
   // Lắng nghe tin nhắn từ server
   onMessageReceived((message) => {
-    messages.value = message;
+    messages.value = message
     nextTick(() => {
       if (container.value) {
-        container.value.scrollTop = container.value.scrollHeight;
+        container.value.scrollTop = container.value.scrollHeight
       }
-    });
-  });
-};
+    })
+  })
+}
 
 // Gửi tin nhắn
 const send = () => {
   if (newMessage.value.trim()) {
     const dataSend = { room: selectedRoom.value, message: newMessage.value, sender: username.value }
-    sendMessage(dataSend);
-    newMessage.value = "";
+    sendMessage(dataSend)
+    newMessage.value = ''
     messages.value.push(dataSend)
-    console.log(messages.value);
-    
+    console.log(messages.value)
   }
-};
+}
 </script>
 
 <template>
