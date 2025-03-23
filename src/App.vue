@@ -12,6 +12,9 @@ const login = () => loginWithRedirect()
     <RouterLink to="/about" class="p-5 border-1">About</RouterLink>
     <RouterLink to="/login" class="p-5 border-1" @click="login">Login</RouterLink>
     <RouterLink to="/logout" class="p-5 border-1" @click="logout">Logout</RouterLink>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/about">About</RouterLink>
+    <RouterLink to="/chat">Chat</RouterLink>
   </nav>
   <div class="text-center">
     <RouterView />
